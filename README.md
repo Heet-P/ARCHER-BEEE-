@@ -1,0 +1,37 @@
+** CODE'SPLANATION:-
+[A]---> The first block of code i.e above void setup() is for all the including of libraries and to Define the pins.
+1)The 4 motors are connected to the arduino digital pins 4,5,6,7 (through motor-driver L298N's in1 in2 in3 and in4 pins).
+2)The 3 sensors DO Pin is connected to the Digital Pins 8,9,10 of arduino and Servo and Pump are at 11 And 12.
+3)Three Variables are declared as l1,c1,r1 as for left, center and right. ---> these are used just for troubleshooting further using serial monitor.
+4)A Servo object is created as to use the servo library wherever needed which is "myservo".
+5)Original Position of servo is 0.
+[B]---> Now Moving onto the Void Setup()
+1)A communication is begin with the serial monitor (refer to point 3 of [A])
+2)All the pins of arduino are defined as to what their function is that is either those pin take input or give output.
+3)myservo.write(90) resets the servo to its neutral positions as such servo always faces forward.
+4)The last digitalwrite's ensures that all the things are turned off, ---> the wheel-motors use active-high logic and the water pump uses activ-low logic.
+[C]---> Now Moving onto the void loop()
+1)l1,c1, and r1 reads the values of the flame sensors and stores them inside (the values can either be 0 or 1 since we are using digital output pins from the flame sensors (DO)
+{refer to point 2 of [A].
+2)Then for troubleshooting we are printing the values of all three sensors to serial monitor in case we need to troubleshoot {refer to point 3 of [A]} and a delay is added so it doesnt continuosly
+spam the serial monitor.
+3)Then the logic for "fire-detection" is written,
+  i) The first if conditions is for the center sensor which detects the front fires(it checks if c1 is high(i.e if the value is '1') it will turn the motors on (since only back 2 motors
+  are needed to move a vehicle forward the front 2 are kept off) and after moving for 3seconds the motors are turned off and after 15milliseconds the waterpump will be turned on.
+  {The 3 second logic is such that any fire detected could be reached in 3 seconds}
+  ii)Then the code for servo moving is written, the servo will move from 90* to 180* four times and spray the water.
+  iii)The second if condtion is for the left sensor, that is if fire is detected by the left sensor we need to move archer to left we can do that by turning only certain motors on, for this case
+  we turn on the 2 motors of the right side so that it takes a left turn ( it takes left turn for 2 seconds and then stops if the fire then is still detected by the left sensor it will again turn more left
+  or else if the fire is centered, the middle senor will detect it and the car will move forward)
+  once the robot is near the fire (ideally after 3 second) the water pump will be activated and the same servo logic will be used as used in the above if condtion.
+  iv)The third id condtion is for the right sensor and the same logic is used as we used for left sensor just instead of turning left we turn te robot right by turning on the left side motors.
+[D]---> The ending default Behaviour:
+1)This is the default condition or as we say stop conditon as whe no fire is detected the robot will not move as all the motors are 'low' that is off an dthe water pump will be stopped since it is
+'high' i.e off  {Refer to active-low and active high logic}**
+
+
+**ACTIVE LOW AND ACTIVE HIGH LOGIC EXPLAINATION**
+-Active-Low logic is when we give the command of 'HIGH' it means "off" and when 'LOW' is given it means "on".
+-Active-High logic is when we give the command 'High' it means "on" and when 'LOW' is given it means "off".
+
+Hope you understand, if not contact me in class -_-.
