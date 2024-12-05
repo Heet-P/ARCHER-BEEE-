@@ -40,4 +40,5 @@ spam the serial monitor.
 -Active-Low logic is when we give the command of 'HIGH' it means "off" and when 'LOW' is given it means "on".
 -Active-High logic is when we give the command 'High' it means "on" and when 'LOW' is given it means "off".
 
-Hope you understand, if not contact me in class -_-.
+Hope you understand, if not contact me in class.
+
